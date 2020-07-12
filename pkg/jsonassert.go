@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"log"
 	"strings"
+
+	. "github.com/larskoelpin/golang-json-assert/pkg/internal"
 )
 
 type ActualJson struct {

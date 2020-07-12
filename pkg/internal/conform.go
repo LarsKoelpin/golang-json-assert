@@ -1,4 +1,4 @@
-package main
+package internal
 
 func Conform(actual map[string]interface{}, expectation map[string]interface{}) bool {
 	for key, value := range expectation {

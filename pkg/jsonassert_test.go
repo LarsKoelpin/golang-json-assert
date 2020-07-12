@@ -100,5 +100,17 @@ func TestSpec(t *testing.T) {
 			So(Expect(actual).ToConform(expected), ShouldBeTrue)
 		})
 
+		Convey("It shall not conform array if missing object", func() {
+			actual := `[{"name": "lars", "age": 12}]`
+			expected := `[{"name": "lars"}, {"name": "renke"}]`
+			So(Expect(actual).ToConform(expected), ShouldBeFalse) // Missing Renke
+		})
+
+		Convey("It shall conform array all objects are included", func() {
+			actual := `[{"name": "lars", "age": 12}, {"name": "renke", "age": 16}]`
+			expected := `[{"name": "lars"}, {"name": "renke"}]`
+			So(Expect(actual).ToConform(expected), ShouldBeTrue)
+		})
+
 	})
 }

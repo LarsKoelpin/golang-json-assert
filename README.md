@@ -1,4 +1,5 @@
 # Golang Json Assert
+![golang-json-assert](https://github.com/LarsKoelpin/golang-json-assert/workflows/golang-json-assert/badge.svg)
 
 A Go library for testing JSON strings.
 

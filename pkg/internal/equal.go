@@ -5,6 +5,22 @@ import (
 	"reflect"
 )
 
+func StrictEqual(actual interface{}, expectation interface{}) bool {
+	if IsArray(actual) && IsArray(expectation) {
+		actualArr, _ := actual.([]interface{})
+		expectationArr, _ := expectation.([]interface{})
+		return EqualArray(actualArr, expectationArr)
+	}
+
+	if IsObject(actual) && IsObject(expectation) {
+		actualObj, _ := actual.(map[string]interface{})
+		expectedObj, _ := expectation.(map[string]interface{})
+		return EqualObject(actualObj, expectedObj)
+	}
+
+	panic("UNKNOWN TYPE")
+}
+
 // 12 == 12
 func EqualPrimitive(actual interface{}, expected interface{}) bool {
 	return actual == expected
@@ -101,20 +117,4 @@ func EqualObject(actual map[string]interface{}, expected map[string]interface{})
 		}
 	}
 	return true
-}
-
-func StrictEqual(actual interface{}, expectation interface{}) bool {
-	if IsArray(actual) && IsArray(expectation) {
-		actualArr, _ := actual.([]interface{})
-		expectationArr, _ := expectation.([]interface{})
-		return EqualArray(actualArr, expectationArr)
-	}
-
-	if IsObject(actual) && IsObject(expectation) {
-		actualObj, _ := actual.(map[string]interface{})
-		expectedObj, _ := expectation.(map[string]interface{})
-		return EqualObject(actualObj, expectedObj)
-	}
-
-	panic("UNKNOWN TYPE")
 }

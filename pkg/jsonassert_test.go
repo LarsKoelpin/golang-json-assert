@@ -93,5 +93,12 @@ func TestSpec(t *testing.T) {
 			expected := `{"street": 13}`
 			So(Expect(actual).ToConform(expected), ShouldEqual, false)
 		})
+
+		Convey("It shall conform object in array", func() {
+			actual := `[{"name": "lars", "age": 12}]`
+			expected := `[{"name": "lars"}]`
+			So(Expect(actual).ToConform(expected), ShouldBeTrue)
+		})
+
 	})
 }

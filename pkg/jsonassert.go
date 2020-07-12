@@ -39,15 +39,16 @@ func (a ActualJson) ToEqual(expectation string) bool {
 }
 
 func (a ActualJson) ToConform(expectation string) bool {
+	if a.jsonArray != nil {
+		if strings.HasPrefix(expectation, "[") {
+			expect := UnmarshalToArray(expectation)
+			return ConformArray(a.jsonArray, expect)
+		}
+		log.Print("Cannot compare array with object")
+		return false
+	}
 	expectationJsonMap := UmmarshalToMap(expectation)
 	return Conform(a.jsonMap, expectationJsonMap)
-}
-
-type Jsontype struct {
-	jsonType   string // Object, Primitive, Array
-	objValue   map[string]interface{}
-	atomValue  interface{}
-	arrayValue []interface{}
 }
 
 func UmmarshalToMap(src string) map[string]interface{} {

@@ -13,7 +13,7 @@ func IsObject(a interface{}) bool {
 
 func IsPrimitive(a interface{}) bool {
 	actualValueType := reflect.TypeOf(a)
-	return actualValueType.Kind() == reflect.Int || actualValueType.Kind() == reflect.String || actualValueType.Kind() == reflect.Float32
+	return actualValueType.Kind() == reflect.Int || actualValueType.Kind() == reflect.String || actualValueType.Kind() == reflect.Float32 || actualValueType.Kind() == reflect.Float64
 }
 
 func IsArray(a interface{}) bool {

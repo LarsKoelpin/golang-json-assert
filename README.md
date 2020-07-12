@@ -2,9 +2,14 @@
 
 A Go library for testing JSON strings.
 
+## Mission
+I could not find any library implementing the "Conform behavior", which checks,
+ if JSON objects are downwards-compatible.  
+ 
+ 
 ## Usage
 
-For full specifiction of the library see `pkg/jsonassert_test.go`.
+For full specification of the library see `pkg/jsonassert_test.go`.
 
 In a Nutshell, given to strings, the library can check for *strict* equality:
 ``` go
@@ -20,7 +25,8 @@ Expect(actual).ToEqual(actual) // returns true
 
 
 But, It can also check, if a JSON conforms with another. This means, that in theory
-actual and expected value are schematically compatible.
+actual and expected value are schematically compatible. This can be used to ensure that 
+diffrent JSON objects provide some compability.
 
 ``` go
 actual := `

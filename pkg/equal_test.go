@@ -33,7 +33,7 @@ func TestEquality(t *testing.T) {
 			So(StrictEqual(actual, expected), ShouldEqual, false)
 		})
 
-		Convey("Shall fail simple StrictEquality for diffrent values", func() {
+		Convey("Shall fail simple StrictEquality for different values", func() {
 			actual := make(map[string]interface{}, 0)
 			expected := make(map[string]interface{}, 0)
 			actual["hello"] = 12
@@ -118,6 +118,5 @@ func TestEquality(t *testing.T) {
 			expected["one"] = 1255
 			So(ConformKeys(actual, expected), ShouldEqual, true)
 		})
-
 	})
 }

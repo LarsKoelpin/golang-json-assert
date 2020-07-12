@@ -30,8 +30,8 @@ func TestSpec(t *testing.T) {
 
 	Convey("Expect#ToEqual", t, func() {
 		Convey("It shall be true, if all key and values are the same", func() {
-			actual := `{"name": "lars", "age": 12}`
-			expected := `{"name": "lars", "age": 12}`
+			actual := `{"name": "lars", "age": 12, "friends": ["lars"]}`
+			expected := `{"name": "lars", "age": 12, "friends": ["lars"]}`
 			So(Expect(actual).ToEqual(expected), ShouldEqual, true)
 		})
 
@@ -41,11 +41,18 @@ func TestSpec(t *testing.T) {
 			So(Expect(actual).ToEqual(expected), ShouldEqual, false)
 		})
 
-		Convey("It shall be false, if a array value is diffrent", func() {
+		Convey("It shall be false, if an array value is different", func() {
 			actual := `{"name": "lars", "age": 12, "friends": ["lars"]}`
 			expected := `{"name": "lars", "age": 12, "friends": ["eric"]}`
 			So(Expect(actual).ToEqual(expected), ShouldEqual, false)
 		})
+
+		Convey("It shall be true, if arrays are equal", func() {
+		  actual := `["lars", "renke"]`
+		  expected := `["lars", "renke"]`
+		  So(Expect(actual).ToEqual(expected), ShouldBeTrue)
+    })
+
 	})
 
 	Convey("Expect#ToConform", t, func() {

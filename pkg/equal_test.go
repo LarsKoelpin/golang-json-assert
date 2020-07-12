@@ -40,25 +40,6 @@ func TestEquality(t *testing.T) {
 			expected["hello"] = 13
 			So(StrictEqual(actual, expected), ShouldEqual, false)
 		})
-
-	})
-
-	Convey("KeyEqual", t, func() {
-		Convey("Shall succeed simple KeyEquality", func() {
-			actual := make(map[string]interface{}, 0)
-			expected := make(map[string]interface{}, 0)
-			actual["hello"] = 12
-			expected["hello"] = 15
-			So(KeyEquality(actual, expected), ShouldEqual, true)
-		})
-
-		Convey("Shall fail simple KeyEquality", func() {
-			actual := make(map[string]interface{}, 0)
-			expected := make(map[string]interface{}, 0)
-			actual["hello"] = 12
-			expected["xd"] = 15
-			So(KeyEquality(actual, expected), ShouldEqual, false)
-		})
 	})
 
 	Convey("Conform", t, func() {
@@ -97,26 +78,6 @@ func TestEquality(t *testing.T) {
 			expected["one"] = 12
 			expected["uneedthisToo"] = 12
 			So(Conform(actual, expected), ShouldEqual, false)
-		})
-	})
-
-	Convey("ConformKeys", t, func() {
-		Convey("Shall conform with same value", func() {
-			actual := make(map[string]interface{}, 0)
-			expected := make(map[string]interface{}, 0)
-			actual["one"] = 12
-			actual["two"] = 12
-			expected["one"] = 12
-			So(ConformKeys(actual, expected), ShouldEqual, true) // Onforms, as Expcted only contians key "one"
-		})
-
-		Convey("Shall conform Keys with diffret value", func() {
-			actual := make(map[string]interface{}, 0)
-			expected := make(map[string]interface{}, 0)
-			actual["one"] = 12
-			actual["two"] = 12
-			expected["one"] = 1255
-			So(ConformKeys(actual, expected), ShouldEqual, true)
 		})
 	})
 }

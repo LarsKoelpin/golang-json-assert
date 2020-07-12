@@ -48,10 +48,30 @@ func TestSpec(t *testing.T) {
 		})
 
 		Convey("It shall be true, if arrays are equal", func() {
-		  actual := `["lars", "renke"]`
-		  expected := `["lars", "renke"]`
-		  So(Expect(actual).ToEqual(expected), ShouldBeTrue)
-    })
+			actual := `["lars", "renke"]`
+			expected := `["lars", "renke"]`
+			So(Expect(actual).ToEqual(expected), ShouldBeTrue)
+		})
+
+		Convey("It shall be true, if compley types are equal", func() {
+			actual := `{
+          "name": "lars",
+          "friends": [{"name": "renke"}]
+        }`
+			So(Expect(actual).ToEqual(actual), ShouldBeTrue)
+		})
+
+		Convey("It shall be false, if complex types are different", func() {
+			actual := `{
+          "name": "lars",
+          "friends": [{"name": "renke"}]
+        }`
+			expected := `{
+          "name": "lars",
+          "friends": [{"name": "notrenke"}]
+        }`
+			So(Expect(actual).ToEqual(expected), ShouldBeFalse)
+		})
 
 	})
 

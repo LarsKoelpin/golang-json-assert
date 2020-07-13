@@ -48,17 +48,18 @@ func ConformObject(actual map[string]interface{}, expected map[string]interface{
 		expectedValue, hasExpectedKey := expected[key]
 
 		if hasExpectedKey && !hasActualKey {
-			log.Print("Key difference")
+			log.Print("Key difference at key", key)
 			return false
 		}
 
 		if !HaveSameType(actualValue, expectedValue) {
-			log.Print("Type difference")
+			log.Print("Type difference at key ", key)
 			return false
 		}
 
 		if IsPrimitive(actualValue) && IsPrimitive(expectedValue) {
 			if !EqualPrimitive(actualValue, expectedValue) {
+				log.Print("Value difference at key: ", key)
 				return false
 			}
 		}
@@ -67,6 +68,7 @@ func ConformObject(actual map[string]interface{}, expected map[string]interface{
 			actualChildObject, _ := actualValue.(map[string]interface{})
 			expectedChildObject, _ := expectedValue.(map[string]interface{})
 			if !ConformObject(actualChildObject, expectedChildObject) {
+				log.Print("Object difference at key ", key)
 				return false
 			}
 		}
@@ -75,6 +77,7 @@ func ConformObject(actual map[string]interface{}, expected map[string]interface{
 			actualChildObject, _ := actualValue.([]interface{})
 			expectedChildObject, _ := expectedValue.([]interface{})
 			if !ConformArray(actualChildObject, expectedChildObject) {
+				log.Print("Array difference at key ", key)
 				return false
 			}
 		}
@@ -89,5 +92,6 @@ func findAnyConformObject(wanted interface{}, actual []interface{}, seen map[int
 			return true
 		}
 	}
+	log.Print("No conformed object found")
 	return false
 }

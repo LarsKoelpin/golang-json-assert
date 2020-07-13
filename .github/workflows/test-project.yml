@@ -14,4 +14,3 @@ jobs:
           go-version: '^1.14.4' # The Go version to download (if necessary) and use.
       - name: Test
         run: go test
-        working-directory: pkg

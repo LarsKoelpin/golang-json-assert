@@ -22,39 +22,15 @@ func Conform(actual interface{}, expectation interface{}) bool {
 }
 
 func ConformArray(actual []interface{}, expected []interface{}) bool {
-	actualLen := len(actual)
-
-	for i := 0; i < actualLen; i++ {
-		aValue := actual[i]
+	expectedLen := len(expected)
+	seen := make(map[int]bool)
+	for i := 0; i < expectedLen; i++ {
 		eValue := expected[i]
-
-		if !HaveSameType(aValue, eValue) {
+		if !findAnyConformObject(eValue, actual, seen) && seen[i] == false {
+			seen[i] = true
 			return false
 		}
-
-		if IsObject(aValue) && IsObject(eValue) {
-			aValueObject, _ := aValue.(map[string]interface{})
-			eValueObject, _ := eValue.(map[string]interface{})
-			if !ConformObject(aValueObject, eValueObject) {
-				return false
-			}
-		}
-
-		if IsPrimitive(aValue) && IsPrimitive(eValue) {
-			if !EqualPrimitive(aValue, eValue) {
-				return false
-			}
-		}
-
-		if IsArray(aValue) && IsArray(eValue) {
-			aValueArray := aValue.([]interface{})
-			eValueArray := aValue.([]interface{})
-			if !ConformArray(aValueArray, eValueArray) {
-				return false
-			}
-		}
 	}
-
 	return true
 }
 
@@ -104,4 +80,14 @@ func ConformObject(actual map[string]interface{}, expected map[string]interface{
 		}
 	}
 	return true
+}
+
+func findAnyConformObject(wanted interface{}, actual []interface{}, seen map[int]bool) bool {
+	for i := 0; i < len(actual); i++ {
+		if Conform(actual[i], wanted) && !seen[i] {
+			seen[i] = true
+			return true
+		}
+	}
+	return false
 }

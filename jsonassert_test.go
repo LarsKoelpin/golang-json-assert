@@ -1,4 +1,4 @@
-package jsonassert
+package golang_json_assert
 
 import (
 	"testing"

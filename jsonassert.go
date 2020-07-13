@@ -1,11 +1,11 @@
-package jsonassert
+package golang_json_assert
 
 import (
 	"encoding/json"
 	"log"
 	"strings"
 
-	. "github.com/larskoelpin/golang-json-assert/pkg/internal"
+	. "github.com/larskoelpin/golang-json-assert/internal"
 )
 
 type ActualJson struct {

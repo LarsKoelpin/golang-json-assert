@@ -42,7 +42,7 @@ func (a ActualJson) ToConform(expectation string) bool {
 	if a.jsonArray != nil {
 		if strings.HasPrefix(expectation, "[") {
 			expect := UnmarshalToArray(expectation)
-			return ConformArray(a.jsonArray, expect)
+			return ConformArray(a.jsonArray, expect, true)
 		}
 		log.Print("Cannot compare array with object")
 		return false

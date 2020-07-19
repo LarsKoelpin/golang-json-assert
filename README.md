@@ -5,7 +5,7 @@ A Go library for testing JSON strings.
 
 ## Mission
 I could not find any library implementing the "Conform behavior", which checks,
- if JSON objects are downwards-compatible.  
+ if JSON objects are downwards-compatible, therefore testing if there is a semantic versioning major bump change.  
  
  
 ## Usage

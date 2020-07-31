@@ -18,7 +18,11 @@ func ConformWithWarning(actual interface{}, expectation interface{}, shallwarn b
 		return ConformObject(actualObj, expectedObj, shallwarn)
 	}
 
-	panic("UNKNOWN TYPE")
+	if IsPrimitive(actual) && IsPrimitive(expectation) {
+		return actual == expectation
+	}
+
+	panic("UNKNOWN TYPE: Actual: " + reflect.TypeOf(actual).Name() + " Expected: " + reflect.TypeOf(expectation).Name())
 }
 
 func Conform(actual interface{}, expectation interface{}) bool {
@@ -34,7 +38,11 @@ func Conform(actual interface{}, expectation interface{}) bool {
 		return ConformObject(actualObj, expectedObj, true)
 	}
 
-	panic("UNKNOWN TYPE")
+	if IsPrimitive(actual) && IsPrimitive(expectation) {
+		return actual == expectation
+	}
+
+	panic("UNKNOWN TYPE: Actual: " + reflect.TypeOf(actual).Name() + " Expected: " + reflect.TypeOf(expectation).Name())
 }
 
 func ConformArray(actual []interface{}, expected []interface{}, shallWarn bool) bool {
